@@ -17,7 +17,7 @@ function createMockBot(controller) {
       logger: {log: () => {}},
   })
   const bot = mockController.spawn({type: 'slack'});
-  botController(controller);
+  controller(mockController);
   return bot;
 }
 
