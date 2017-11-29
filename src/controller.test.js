@@ -32,13 +32,13 @@ describe("bot", () => {
   });
 
   it("should repond to hi", function(){
-    return sendInput(bot, 'a user', 'hi')
+    return sendInput(bot, 'test', 'hi')
       .then(message => {
-        expect(message.text).to.equal('hello there');
+        expect(message.text).to.equal('Hello test');
       });
   })
   it('should not respond to "boop"', () => {
-    return sendInput(bot, 'a user', 'boop')
+    return sendInput(bot, 'test', 'boop')
       .then(message => {
         expect(message).to.be.empty;
       });
