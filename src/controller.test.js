@@ -1,7 +1,8 @@
 const Botmock = require('botkit-mock');
 const botController = require('./controller');
-const expect = require('chai').expect;
+const expect = require('chai').expect; //mochat test global require
 
+//Extract these to 'helper' functions
 function sendInput(bot, user, text, channel="D") {
   return bot.usersInput([{
     user,
@@ -10,15 +11,24 @@ function sendInput(bot, user, text, channel="D") {
   }]);
 }
 
+function createMockBot(controller) {
+  const mockController = Botmock({
+      disable_startup_messages: true,
+      logger: {log: () => {}},
+  })
+  const bot = mockController.spawn({type: 'slack'});
+  botController(controller);
+  return bot;
+}
+
+function shutdownBot(bot) {
+  bot.botkit.tickInterval && clearInterval(bot.botkit.tickInterval);
+}
+
 describe("bot", () => {
   let bot;
   beforeEach(() => {
-    const controller = Botmock({
-      disable_startup_messages: true,
-      logger: {log: () => {}},
-    });
-    bot = controller.spawn({type: 'slack'});
-    botController(controller);
+    bot = createMockBot(botController);
   });
 
   it("should repond to hi", function(){
