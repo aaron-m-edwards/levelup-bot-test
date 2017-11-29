@@ -1,5 +1,5 @@
 const createController = require('./src/controller');
-const Botkit = require('Botkit');
+const Botkit = require('botkit');
 
 
 function createSlackBot(token) {
