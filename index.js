@@ -1,4 +1,4 @@
-const createBot = require('./bot');
+const createController = require('./src/controller');
 const Botkit = require('Botkit');
 
 
@@ -29,4 +29,4 @@ const slackToken = process.env.SLACK_TOKEN;
 
 const { bot, controller } = slackToken ? createSlackBot(slackToken) : createConsoleBot();
 
-createBot(controller);
+createController(controller);
